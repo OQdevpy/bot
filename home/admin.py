@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Day, TelegamAdmin, Video, DayStatistics
+from .models import Day, TelegamAdmin, Token, Video, DayStatistics
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ admin.site.register(TelegamAdmin)
 admin.site.register(Video)
 admin.site.register(Day)
 admin.site.register(DayStatistics, DayStatisticsAdmin)
+admin.site.register(Token)
