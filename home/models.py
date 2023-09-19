@@ -53,18 +53,12 @@ class DayStatistics(models.Model):
 @receiver(pre_save, sender=Video)
 def set_initial_view_count(sender, instance, **kwargs):
     counts = play_count(instance.url)
-    instance.first_view_count = counts[0]
-    print(counts)
-    print(123456)
-    
-    # # Get or create a day based on the current date
+    instance.first_view_count = counts[0]  
     day, _ = Day.objects.get_or_create()
     day_video, _ = DayStatistics.objects.get_or_create(
         video=instance,
         day=day,
     )
-    print(counts)
-    
     day_video.play_count = counts[0]
     day_video.digg_count = counts[1]
     day_video.collect_count = counts[2]
