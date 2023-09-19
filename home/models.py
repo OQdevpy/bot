@@ -13,6 +13,14 @@ from telebot import TeleBot
 bot = TeleBot(TOKEN)
 from home.utils import play_count
 
+class Token(models.Model):
+    RapidApiKey = models.CharField(max_length=300)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.RapidApiKey
+
 
 class TelegamAdmin(models.Model):
     name = models.CharField(max_length=50)
