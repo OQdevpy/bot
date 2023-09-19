@@ -4,8 +4,13 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import json
-from .cron import bot
+TOKEN = "6456801430:AAHXFwVb3PWnBRnfKqWuMymz_tjfVClIOtw"
 
+
+
+from telebot import TeleBot
+
+bot = TeleBot(TOKEN)
 from home.utils import play_count
 
 
@@ -71,6 +76,7 @@ def set_initial_view_count(sender, instance, **kwargs):
         day_video.comment_count = counts[4]
         day_video.save()
     except Exception as e:
+        print(e)
         bot.send_message(chat_id=1614151217, text=f'{instance.url}  ---  {e}')
 
 

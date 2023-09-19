@@ -126,8 +126,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# CRONJOBS = [
-#     ('* * * * *', 'home.cron.day_statistics'),
-#     ('* * * * *', 'home.cron.send_messages'),
+CRONJOBS = [
+    ('0 * * * *', 'home.cron.day_statistics','>> /logs/day_statistics.log'),
+    ('0 * * * *', 'home.cron.send_messages','>> /logs/send_messages.log'),
 
-# ]
+]

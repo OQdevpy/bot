@@ -11,7 +11,13 @@ def day_statistics():
     videos = Video.objects.all()
     for video in videos:
         
-        video.save()
+        try:
+            video.save()
+        except Exception as e:
+            print(e)
+            bot.send_message(chat_id=1614151217, text=f'{video}  ---  {e}')
+            print(e)
+            continue
 
 
 
