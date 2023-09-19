@@ -128,4 +128,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS = [
     ('* * * * *', 'home.cron.day_statistics'),
+    ('* * * * *', 'home.cron.send_message'),
+
 ]
