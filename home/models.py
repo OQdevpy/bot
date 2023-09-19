@@ -30,6 +30,11 @@ class TelegamAdmin(models.Model):
         return self.name
 
 
+    class Meta:
+        verbose_name = 'Админ'
+        verbose_name_plural = 'Админы'
+
+
 # Create your models here.
 class Video(models.Model):
     url = models.URLField(unique=True)
@@ -43,11 +48,21 @@ class Video(models.Model):
         return self.url
 
 
+    class Meta:
+        verbose_name = 'Видео'
+        verbose_name_plural = 'Видео'
+
+
 class Day(models.Model):
     date = models.DateField(unique=True, auto_now_add=True)
 
     def __str__(self):
         return str(self.date)
+
+
+    class Meta:
+        verbose_name = 'День'
+        verbose_name_plural = 'Дни'
 
 
 class DayStatistics(models.Model):
@@ -64,6 +79,12 @@ class DayStatistics(models.Model):
 
     def __str__(self):
         return f'{self.video} - {self.created_at}'
+
+
+    class Meta:
+        verbose_name = 'Статистика дня'
+        verbose_name_plural = 'Статистика дней'
+
 
 
 @receiver(pre_save, sender=Video)
