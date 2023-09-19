@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import json
-TOKEN = "6456801430:AAHXFwVb3PWnBRnfKqWuMymz_tjfVClIOtw"
+TOKEN = "6520623145:AAFfCLyxIAdVzRhYo1LcE0r8oJAKm5gVVdc"
 
 
 
