@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CRONJOBS = [
-    ('* * * * *', 'home.cron.day_statistics'),
-    ('* * * * *', 'home.cron.send_message'),
+    ('0 * * * *', 'home.cron.day_statistics','>> /logs/day_statistics.log'),
+    ('0 * * * *', 'home.cron.send_messages','>> /logs/send_messages.log'),
 
 ]
