@@ -1,20 +1,20 @@
 bulk_update:
-	python manage.py bulk_update
+	python3 manage.py bulk_update
 
 populate_dict:
-	python manage.py populate_dict
+	python3 manage.py populate_dict
 
 # supervisor:
 # 	sudo supervisorctl restart backend
 
 run:
-	python manage.py runserver 8000
+	python3 manage.py runserver 8000
 
 migrations:
-	python manage.py makemigrations
+	python3 manage.py makemigrations
 
 migrate:
-	python manage.py migrate
+	python3 manage.py migrate
 
 
 commit_name := $(filter-out $@,$(MAKECMDGOALS))
@@ -41,7 +41,7 @@ merge:
 	git checkout oqdev
 
 createsuperuser:
-	python3 manage.py createsuperuser --username admin --email oqdevpy@gmail.com
+	python33 manage.py createsuperuser --username admin --email oqdevpy@gmail.com
 	
 
 app_name := $(word 2, $(MAKECMDGOALS))
@@ -59,7 +59,7 @@ app-api:
 	@touch $(app_name)/api/v1/permissions.py
 
 translation:
-	python manage.py makemessages -l ru
-	python manage.py makemessages -l en
-	python manage.py makemessages -l uz
-	python manage.py compilemessages
+	python3 manage.py makemessages -l ru
+	python3 manage.py makemessages -l en
+	python3 manage.py makemessages -l uz
+	python3 manage.py compilemessages
