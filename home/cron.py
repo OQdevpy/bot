@@ -104,5 +104,3 @@ def send_messages_30():
         except Exception as e:
             bot.send_message(chat_id=1614151217, text=f'{chat_id}  ---  {e}')
 
-def send_messages_():
-    bot.send_message(chat_id=1614151217, text='test')
