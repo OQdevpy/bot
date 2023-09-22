@@ -1,5 +1,4 @@
 import requests
-from pprint import pprint
 
 url = "https://tiktok-video-no-watermark2.p.rapidapi.com/"
 
@@ -12,8 +11,6 @@ headers = {
 
 response = requests.get(url, headers=headers, params=querystring)
 
-print(response.status_code)
-pprint(response.json())
 
 
 import requests
@@ -28,5 +25,3 @@ headers = {
 }
 
 response = requests.get(url, headers=headers, params=querystring)
-
-print(response.json())

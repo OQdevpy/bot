@@ -18,7 +18,6 @@ bot.set_my_commands(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    print(message.chat.id)
     with open('admins.json', 'r') as file:
         admins = json.load(file)
     if message.chat.id not in admins['admins']:

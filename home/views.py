@@ -4,7 +4,6 @@ from .models import Video, Day, DayStatistics,Token
 from datetime import date, timedelta
 from django.db.models import Sum
 import requests
-from pprint import pprint
 
 def last_7(request):
     today = date.today()
