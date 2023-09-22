@@ -134,11 +134,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CRONJOBS = [
-    # ('schedule', 'app_name.management.command_name', 'log_file_path')
-    ('0 * * * *', 'home.cron.day_statistics', '>> /logs/day_statistics.log'),
-    ('0 * * * *', 'home.cron.send_messages', '>> /logs/send_messages.log'),
-    ('0 * * * *', 'home.cron.send_messages_7', '>> /logs/send_messages_7.log'),
-    ('0 * * * *', 'home.cron.send_messages_30', '>> /logs/send_messages_30.log'),
+    # # ('schedule', 'app_name.management.command_name', 'log_file_path')
+    # ('0 * * * *', 'home.cron.day_statistics', '>> /logs/day_statistics.log'),
+    # ('0 * * * *', 'home.cron.send_messages', '>> /logs/send_messages.log'),
+    # ('0 * * * *', 'home.cron.send_messages_7', '>> /logs/send_messages_7.log'),
+    # ('0 * * * *', 'home.cron.send_messages_30', '>> /logs/send_messages_30.log'),
+    ('* * * * *', 'home.cron.send_messages_'),
+
+
 ]
 
 

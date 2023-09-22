@@ -12,7 +12,7 @@ headers = {
 
 response = requests.get(url, headers=headers, params=querystring)
 
-
+print(response.status_code)
 pprint(response.json())
 
 

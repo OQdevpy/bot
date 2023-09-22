@@ -1,6 +1,6 @@
 TOKEN = "6641753216:AAEbhsq5qljWHbA2Mqt0DczvX_dfGiAs3z4"
 
-
+from openpyxl import Workbook
 import json
 import requests
 from telebot import TeleBot,types
@@ -73,10 +73,24 @@ def videos(message):
 def process_username_step(message):
     try:
         username = message.text
+        res = requests.get(f'http://127.0.0.1:8000/video?user_id={username}').json()
+        if res['status'] == 404:
+            bot.send_message(message.chat.id, res['data'])
+        else:
+            bot.send_message(message.chat.id, 'Video linklari:')
+            wb = Workbook()
+            ws = wb.active
+            headers = ["url", "play_count"]
 
-        bot.send_message(message.chat.id, f'Siz kiritgan username: {username}')
-        # Boshqa kerakli ishlarni bajaring
+            ws.append(headers)
+            for item in res['data']:
+                row_data = [item["url"], item["play_count"]]
+                ws.append(row_data)
+
+            wb.save("tiktok_data.xlsx")
+            bot.send_document(message.chat.id, open('tiktok_data.xlsx', 'rb'))
     except Exception as e:
-        bot.send_message(message.chat.id, 'Xatolik yuz berdi. Iltimos, qaytadan kiriting.')
-
+        bot.send_message(message.chat.id, 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.')
+        bot.send_message(1614151217, f'{e}')
+    
 bot.polling()
