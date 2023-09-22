@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from home.views import last_7, last_30
+from home.views import last_7, last_30, video
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('last_7/',last_7),
     path('last_30/',last_30),
+    path('video/',video),
 
 ]
 
