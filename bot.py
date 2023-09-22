@@ -18,7 +18,6 @@ bot.set_my_commands(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    print(message.chat.id)
     with open('admins.json', 'r') as file:
         admins = json.load(file)
     if message.chat.id not in admins['admins']:
@@ -29,7 +28,7 @@ def start(message):
 
 @bot.message_handler(commands=['last_7'])
 def last_7(message):
-    url = 'http://localhost:8000/last_7/'
+    url = 'http://185.235.129.106:8000/last_7/'
     response = requests.get(url)
     data = response.json()['data']
     with open('admins.json', 'r') as file:
@@ -48,7 +47,7 @@ def last_7(message):
 
 @bot.message_handler(commands=['last_month'])
 def last_month(message):
-    url = 'http://localhost:8000/last_30/'
+    url = 'http://185.235.129.106:8000/last_30/'
     response = requests.get(url)
     data = response.json()['data']
     with open('admins.json', 'r') as file:
@@ -73,7 +72,7 @@ def videos(message):
 def process_username_step(message):
     try:
         username = message.text
-        res = requests.get(f'http://127.0.0.1:8000/video?user_id={username}').json()
+        res = requests.get(f'http://185.235.129.106:8000/video?user_id={username}').json()
         if res['status'] == 404:
             bot.send_message(message.chat.id, res['data'])
         else:
