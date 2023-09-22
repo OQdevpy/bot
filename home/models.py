@@ -1,10 +1,10 @@
 from collections.abc import Iterable
-from django.utils import timezone
+from datetime import date
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import json
-TOKEN = "6456801430:AAHXFwVb3PWnBRnfKqWuMymz_tjfVClIOtw"
+TOKEN = "6641753216:AAEbhsq5qljWHbA2Mqt0DczvX_dfGiAs3z4"
 
 
 
@@ -73,6 +73,12 @@ class DayStatistics(models.Model):
     collect_count = models.IntegerField(default=0)
     share_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
+    deltaplay_count = models.IntegerField(default=0)
+    deltadigg_count = models.IntegerField(default=0)
+    deltacollect_count = models.IntegerField(default=0)
+    deltashare_count = models.IntegerField(default=0)
+    deltacomment_count = models.IntegerField(default=0)
+
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -89,11 +95,13 @@ class DayStatistics(models.Model):
 
 @receiver(pre_save, sender=Video)
 def set_initial_view_count(sender, instance, **kwargs):
+    
     try:
-
         counts = play_count(instance.url)
         instance.first_view_count = counts[0]
-        day, _ = Day.objects.get_or_create(date=timezone.now().date())
+        today = date.today()
+        end_day = DayStatistics.objects.filter(video=instance , created_at__date__lte = today ).order_by('-id').first()
+        day = Day.objects.filter(date=today).first() or Day.objects.create(date=today)
         day_video, _ = DayStatistics.objects.get_or_create(
             video=instance,
             day=day,
@@ -103,13 +111,18 @@ def set_initial_view_count(sender, instance, **kwargs):
         day_video.collect_count = counts[2]
         day_video.share_count = counts[3]
         day_video.comment_count = counts[4]
+        if end_day:
+
+                day_video.deltaplay_count = day_video.play_count - end_day.play_count
+                day_video.deltadigg_count = day_video.digg_count - end_day.digg_count
+                day_video.deltacollect_count = day_video.collect_count - end_day.collect_count
+                day_video.deltashare_count = day_video.share_count - end_day.share_count
+                day_video.deltacomment_count = day_video.comment_count - end_day.comment_count
         day_video.save()
     except Exception as e:
-        print(e)
-        bot.send_message(chat_id=1614151217, text=f'{instance.url}  ---  {e}')
+        bot.send_message(chat_id=1614151217, text=f'{str(instance.url)}  ---  {e}')
 
 
-# post save for telegramadmin
 @receiver(pre_save, sender=TelegamAdmin)
 def write_admins(sender, instance, **kwargs):
     admins = {
