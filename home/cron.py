@@ -1,6 +1,6 @@
 from .models import Day, DayStatistics, Video
 TOKEN = "6641753216:AAEbhsq5qljWHbA2Mqt0DczvX_dfGiAs3z4"
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from django.db.models import Sum
 
 from telebot import TeleBot
@@ -103,4 +103,8 @@ def send_messages_30():
             bot.send_message(chat_id=chat_id, text=message)
         except Exception as e:
             bot.send_message(chat_id=1614151217, text=f'{chat_id}  ---  {e}')
+
+
+def send():
+    bot.send_message(chat_id=1614151217, text='Hello')
 
