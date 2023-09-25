@@ -4,6 +4,8 @@ bulk_update:
 populate_dict:
 	python3 manage.py populate_dict
 
+
+
 # supervisor:
 # 	sudo supervisorctl restart backend
 
